@@ -26,6 +26,10 @@ router.post('/', async (req,res) => {
     }
 })
 
+router.get('/me', auth, async (req,res) => {
+    res.send(req.user)
+})
+
 router.post('/logout', auth, async(req,res) => {
     try{
         req.user.tokens = req.user.tokens.filter((token) => {
@@ -46,10 +50,6 @@ router.post('/logoutall', auth, async(req,res) => {
     } catch(err) {
         res.status(500).send()
     }
-})
-
-router.get('/me', auth, async (req,res) => {
-    res.send(req.user)
 })
 
 router.patch('/me', auth, async (req,res) => {
